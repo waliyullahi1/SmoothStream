@@ -18,7 +18,7 @@
         </div>
         <div class="flex mt-5 flex-col justify-center rounded-[2rem] bg-tertiary items-center py-5 gap-7">
           <router-link to="/"> <img src="../assets/image/frame.png" class="w-[24px]" /> </router-link>
-          <router-link to="/"> <img src="../assets/image/vector.png" class="w-[24px]" /> </router-link>
+          <router-link to="/"> <img src="../assets/image/Vec.png" class="w-[24px]" /> </router-link>
         </div>
   </div>
 </template>

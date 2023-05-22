@@ -49,7 +49,7 @@
                       <h1>{{item.time}}</h1>
                   </div>
                </div>
-                <div class="justify-end w-7 flex justify-center items-center rounded-[10rem] h-7 border  ">
+                <div class=" w-7 flex justify-center items-center rounded-[10rem] h-7 border  ">
                 <img src="../assets/image/Heart (1).png" class="w-4 flex justify-end i" alt="">
                 </div>
             </div>
@@ -61,11 +61,11 @@
    <section class="mt-5 container">
     <div class="flex w-fu">
       <div class="w-[150px] h-40"></div>
-      
+      git
       <div  class="w-full  overflow-hidden ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
         <div class="w-[100rem] overflow-scroll">
-          <div class="flex  gap-3 w-[2500px]  w-full text-white">
+          <div class="flex  gap-3 w-[2500px] text-white">
           <div v-for="item in musics" :key="item.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
                <div class="">
                  
