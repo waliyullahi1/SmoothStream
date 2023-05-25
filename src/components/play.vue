@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div>
-                <div class="flex gap-7 items-center justify-center">
+                <div class="flex gap-7 items-center justify-center  2349061976405">
                     <img src="../assets/image/shuffle.png" class="w-7 h-7 md:flex hidden" alt="">
                     <img src="../assets/image/previous.png" class="w-7 h-7 md:flex hidden" alt="">
                     <img src="../assets/image/Frame 7 7.png" class="w-[3rem] " alt="">
@@ -21,7 +21,9 @@
                     <img src="../assets/image/repeate-one.png" class="w-7 h-7 md:flex hidden" alt="">
                 </div>
 
-                <img src="../assets/image/Group 2 (1).png"  class="md:flex hidden" alt="">
+                <div>
+                  <input type="range" value="30" class=" bg-primary mt-4 w-96 range md:flex hidden h-2 rounded-xl">
+                </div><img src="../assets/image/Group 2 (1).png"  class=" hidden" alt="">
                 </div>
                 <div class=" justify w-1/5 md:flex hidden gap-3">
                 <img src="../assets/image/volume-high.png" alt="" class="w-5 h-5">
@@ -50,5 +52,20 @@ export default {
     box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
     -webkit-box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
     -moz-box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
+    }
+
+    .range{
+      -webkit-appearance: none;
+       background: rgb(77, 77, 61);
+
+    }
+    .range::-webkit-slider-thumb {
+       -webkit-appearance:media-slider;
+       background: yellow;
+       color: yellowgreen;
+       width: 10px;
+       height: 10px;
+       border-radius: 100px;
+       border: 2px white solid;
     }
 </style>
