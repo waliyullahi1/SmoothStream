@@ -19,7 +19,7 @@
                     <img src="../assets/image/frameq.png" class="w-6" alt="">
                     <p class="text-l">Add to collection</p>
                   </div>
-                  <img src="../assets/image/heart_plus.svg" class="w-6" alt="">
+                  <img src="../assets/image/heart.svg" class="w-6" alt="">
                 </div>
              </div>
         </div>
@@ -31,7 +31,7 @@
           <div class="flex items-center ">
             <div class="flex items-center  gap-10">
               <img v-bind:src="item.image" class=" w-[40px]  " alt="">
-           <img src="../assets/image/Heart.png" alt="" class="w-5 h-5">
+           <img src="../assets/image/heart.png" alt="" class="w-5 h-5">
             </div>
             
           </div><p class="text-white">{{item.des}}</p>
