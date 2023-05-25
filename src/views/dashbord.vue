@@ -25,7 +25,7 @@
               <img src="../assets/image/els3.png" alt="" class="lg:w-[50px] w-[40px] sticky right-[3.5rem]">
                <img src="../assets/image/els4.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[2rem]  ">
                 <img src="../assets/image/els5.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[1rem]  ">
-                <img src="../assets/image/els56.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[0rem] ">
+                <img src="../assets/image/els6.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[0rem] ">
              </div>
               <div class="flex items-center gap-1">
                 <img src="../assets/image/heart_plus.svg" class="lg:w-7 w-5" alt="">
