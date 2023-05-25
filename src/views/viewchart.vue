@@ -12,11 +12,11 @@
                 <p class="">64 songs ~ 16 hrs+</p>
                 <div class="flex gap-5">
                   <div class="flex rounded-[2rem] gap-3 blurr bg-primary w-fit py-3 px-4">
-                    <img src="../assets/image/Frame 7 7.png" class="w-6" alt="">
+                    <img src="../assets/image/frameq.png" class="w-6" alt="">
                     <p class="text-l">Play all</p>
                   </div>
                   <div class="flex rounded-[2rem] gap-3 blurr bg-primary w-fit py-3 px-4">
-                    <img src="../assets/image/Frame 7 7.png" class="w-6" alt="">
+                    <img src="../assets/image/frameq.png" class="w-6" alt="">
                     <p class="text-l">Add to collection</p>
                   </div>
                   <img src="../assets/image/heart_plus.svg" class="w-6" alt="">
