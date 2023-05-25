@@ -16,18 +16,18 @@
                 <div class="flex gap-7 items-center justify-center  2349061976405">
                     <img src="../assets/image/shuffle.png" class="w-7 h-7 md:flex hidden" alt="">
                     <img src="../assets/image/previous.png" class="w-7 h-7 md:flex hidden" alt="">
-                    <img src="../assets/image/Frame 7 7.png" class="w-[3rem] " alt="">
+                    <img src="../assets/image/frameq.png" class="w-[3rem] " alt="">
                     <img src="../assets/image/next.png" class="w-7 h-7" alt="">
                     <img src="../assets/image/repeate-one.png" class="w-7 h-7 md:flex hidden" alt="">
                 </div>
 
                 <div>
                   <input type="range" value="30" class=" bg-primary mt-4 w-96 range md:flex hidden h-2 rounded-xl">
-                </div><img src="../assets/image/Group 2 (1).png"  class=" hidden" alt="">
+                </div><img src="../assets/image/group.png"  class=" hidden" alt="">
                 </div>
                 <div class=" justify w-1/5 md:flex hidden gap-3">
                 <img src="../assets/image/volume-high.png" alt="" class="w-5 h-5">
-                <img src="../assets/image/Group 2 (1).png" class="w- h-5" alt="">
+                <img src="../assets/image/group.png" class="w- h-5" alt="">
                 </div>
             </div>
             
