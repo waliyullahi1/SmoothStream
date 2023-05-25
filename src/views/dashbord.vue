@@ -28,7 +28,7 @@
                 <img src="../assets/image/els1.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[0rem] ">
              </div>
               <div class="flex items-center gap-1">
-                <img src="../assets/image/heart_plus.svg" class="lg:w-7 w-5" alt="">
+                <img src="../assets/image/heart.svg" class="lg:w-7 w-5" alt="">
                 <h1 class="font-normal te ">33k Likes</h1>
               </div>
             </div>
@@ -52,7 +52,7 @@
                   </div>
                </div>
                 <div class=" w-7 flex justify-center items-center rounded-[10rem] h-7 border  ">
-                <img src="../assets/image/Heart (1).png" class="w-4 flex justify-end i" alt="">
+                <img src="../assets/image/heart1.png" class="w-4 flex justify-end i" alt="">
                 </div>
             </div>
         </div>
