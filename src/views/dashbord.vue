@@ -21,7 +21,7 @@
           <div>
             <div class="flex">
              <div class="flex w-32 overflow-hidden">
-               <img src="../assets/image/els52.png" alt="" class="lg:w-[50px] w-[40px] sticky left-0 right-0 ">
+               <img src="../assets/image/els2.png" alt="" class="lg:w-[50px] w-[40px] sticky left-0 right-0 ">
               <img src="../assets/image/els3.png" alt="" class="lg:w-[50px] w-[40px] sticky right-[3.5rem]">
                <img src="../assets/image/els4.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[2rem]  ">
                 <img src="../assets/image/els5.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[1rem]  ">
