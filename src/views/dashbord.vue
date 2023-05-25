@@ -36,7 +36,7 @@
             <img src="" alt="">
           </div>
         </div>
-        <img src="../assets/image/Pexels Photo by Eric Esma.png" class="hidden md:block" alt="">
+        <img src="../assets/image/pexels.png" class="hidden md:block" alt="">
       </div>
       <div class=" lg:w-1/3 w-full  mt-[25px] ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
