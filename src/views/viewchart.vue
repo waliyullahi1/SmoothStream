@@ -1,13 +1,13 @@
 <template>
-  <div class="bgg w-full font-[Quicksand] h-screen">
-   <div class="w-full bg-opacity-75 bg-primary h-screen">
+  <div class="bgg w-full font-[Quicksand] h-fit">
+   <div class="w-full bg-opacity-75 bg-priary h-sc">
        <Header></Header>
-      <section class="flex  ">
-        <div class="w-[150px] h-20"></div>
-        <div class="flex items-center text-white gap-3 mt-[100px]">
-             <img src="../assets/image/setradio.png" class="w-[15rem]" alt="">
+      <section class="flex pt-10 md:px-1 px-[5rem] ">
+        <div class="w-[150px] h-20 hidden md:block "></div>
+        <div class="flex flex-col lg:flex-row  items-center text-white gap-3 mt-[100px]">
+             <img src="../assets/image/setradio.png" class="w-[24rem] h2" alt="">
              <div class="flex flex-col gap-4">
-                <h1 class="text-3xl text-[#A4C7C6] font-semibold">Tommorow's tunes</h1>
+                <h1 class="text-3xl text-[#A4C7C6] mt-5 font-semibold">Tommorow's tunes</h1>
                 <p class="text-[#EFEEE0]">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit <br>amet   luctus venenatis</p>
                 <p class="">64 songs ~ 16 hrs+</p>
                 <div class="flex gap-5">
@@ -25,8 +25,8 @@
         </div>
       </section>
       <section class="flex mt-9">
-         <div class="w-[150px] h-20"></div>
-        <div class="w-full h-72 scrolls overflow-scroll flex flex-col gap-2 mr-10">
+         <div class="w-[150px] h-40 hidden md:block px-4"></div>
+        <div class="w-full h-[25rem] scrol overflow-scroll flex flex-col gap-2 m-10">
           <div v-for="item in music" :key="item.id"  class="flex justify-between w-full  text-white  rounded-[1rem] items-center gap bg-primary py-4 px-4">
           <div class="flex items-center ">
             <div class="flex items-center  gap-10">
@@ -43,6 +43,7 @@
         </div>
       </section>
    </div>
+   <play></play>
   </div>
 </template>
 
@@ -128,9 +129,9 @@ export default {
 
 <style>
     .bgg{
-        background-image: url(../assets/image/set1.png);
+        background-image: url(../assets/image/shoess.JPG);
         background-repeat: no-repeat;
-        background-size: 90rem;
+        background-size:cover;
  
     }
 

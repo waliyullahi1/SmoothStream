@@ -1,17 +1,19 @@
 <template>
   <div class="bg-primary   font-[Quicksand] h-fit">
-   <div class=" mx-auto bg-primary pt-10">
+   <div class=" mx-auto  bg-primary pt-10">
   
     
     
 
-   <section>
-    <div class="flex gap-10 container ">
+   <section class="ml-0">
+    <div class="block gap-10 md:flex  mr-8">
       <Header></Header>
-      <div class="w-[150px]"></div>
-      <div class=" bg-[#609eaf] mt-[25px] flex justi rounded-[2rem] w-full h- overflow-hidden"> 
+      <div class=" md:flex block">
+        <div class="lg:w-[150px] w-[100px]"></div>
+      <div class="md:block mt-20 lg:flex mx-2 containe w-full block">
+       <div class=" bg-[#609eaf] md:mt-[25px] flex  justi rounded-[2rem] lg:w-2/3 w-full h- overflow-hidden"> 
         <div class="w-full  flex flex-col justify-between py-10 pl-7 text-white font-normal text-xl">
-          <h1>Currated playlist</h1>
+          <h1 class="mb-20 md:mb-5">Currated playlist</h1>
           <div class="f" >
            <h1 class="font-bold text-3xl">R & B Hits</h1> 
            <p class="text-[14px] mt-3">All mine, Lie again, Petty call me everyday, Out of time, No love, Bad habit,<br> and so much more </p>
@@ -19,14 +21,14 @@
           <div>
             <div class="flex">
              <div class="flex w-32 overflow-hidden">
-               <img src="../assets/image/Ellipse 2.png" alt="" class="w-[50px] z-10 sticky left-0 right-0 ">
-              <img src="../assets/image/Ellipse 3.png" alt="" class="w-[50px] z-10 sticky right-[3.5rem]">
-               <img src="../assets/image/Ellipse 4.png" alt="" class="w-[50px]  sticky right-[2rem]  ">
-                <img src="../assets/image/Ellipse 5.png" alt="" class="w-[50px]  sticky right-[1rem]  ">
-                <img src="../assets/image/Ellipse 6.png" alt="" class="w-[50px]  sticky right-[0rem] ">
+               <img src="../assets/image/Ellipse 2.png" alt="" class="lg:w-[50px] w-[40px] sticky left-0 right-0 ">
+              <img src="../assets/image/Ellipse 3.png" alt="" class="lg:w-[50px] w-[40px] sticky right-[3.5rem]">
+               <img src="../assets/image/Ellipse 4.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[2rem]  ">
+                <img src="../assets/image/Ellipse 5.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[1rem]  ">
+                <img src="../assets/image/Ellipse 6.png" alt="" class="lg:w-[50px] w-[40px]  sticky right-[0rem] ">
              </div>
               <div class="flex items-center gap-1">
-                <img src="../assets/image/heart_plus.svg" class="w-7" alt="">
+                <img src="../assets/image/heart_plus.svg" class="lg:w-7 w-5" alt="">
                 <h1 class="font-normal te ">33k Likes</h1>
               </div>
             </div>
@@ -34,9 +36,9 @@
             <img src="" alt="">
           </div>
         </div>
-        <img src="../assets/image/Pexels Photo by Eric Esma.png" alt="">
+        <img src="../assets/image/Pexels Photo by Eric Esma.png" class="hidden md:block" alt="">
       </div>
-      <div class=" w-[50rem]  mt-[25px] ">
+      <div class=" lg:w-1/3 w-full  mt-[25px] ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
         <div class="flex flex-col mt-6 gap-2 text-white overflow-hidden h-[20rem] ">
             <div v-for="item in music" :key="item.id" class="flex gap-3 bg-tertiary  items-center justify-between rounded-[2rem] w-full py-2 px-4  ">
@@ -55,21 +57,23 @@
             </div>
         </div>
       </div>
+     </div>
+    </div>
     </div>
    </section>
    
-   <section class="mt-5 container">
-    <div class="flex w-fu">
-      <div class="w-[150px] h-40"></div>
-      git
-      <div  class="w-full  overflow-hidden ">
+   <section class="mt-5 container md:w-full">
+    <div class="md:flex block  w-fu">
+      <div class="lg:w-[150px] w-[100px]"></div>
+   
+      <div  class="w-full px-4 overflow-hidden ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
-        <div class="w-[100rem] overflow-scroll">
-          <div class="flex  gap-3 w-[2500px] text-white">
+        <div class="w-[100rem] mx-4 overflow-scroll">
+          <div class="flex  gap-3 md:w-[2500px]  w-[2000px] text-white">
           <div v-for="item in musics" :key="item.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
                <div class="">
                  
-                 <img  v-bind:src="item.image" alt="" class="w-[2500px]"/>
+                 <img  v-bind:src="item.image" alt="" class="md:w-[2500px] :w-[1500px]"/>
                   <div>
                     <h1 class="text-[18px] my-0 font-normal ">{{item.header}}</h1>
                   </div>
