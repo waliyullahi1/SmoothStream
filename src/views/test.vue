@@ -137,6 +137,12 @@ export default {
     }
   };
 
+   const playThirdAudio = () => {
+    state.currentAudioIndex = 2;
+    audio.value.src = state.audioSources[state.currentAudioIndex];
+    playAudio();
+  };
+
   return {
     playAudio,
     pauseAudio,

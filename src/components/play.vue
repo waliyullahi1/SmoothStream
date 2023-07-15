@@ -63,6 +63,7 @@ import audioSrc3 from '@/assets/music3.mp3';
 
 export default {
   setup() {
+     const duration = ref(0)
     const state = reactive({
       audioSources: [audioSrc1, audioSrc2, audioSrc3],
       currentAudioIndex: 0,
