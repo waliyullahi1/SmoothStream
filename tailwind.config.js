@@ -8,9 +8,7 @@ module.exports = {
         secondary: "#facd66",
         tertiary: "#1a1e1f",
       },
-      fontFamily: {
-        mermaid: "Mermaid Swash Caps",
-      },
+      
     },
   },
   plugins: [],

@@ -2,7 +2,7 @@
   <div class="bgg w-full font-[Quicksand] h-fit">
    <div class="w-full bg-opacity-75 bg-priary h-sc">
        <Header></Header>
-      <section class="flex pt-10 md:px-1 px-[5rem] ">
+      <section class="flex pt-20 md:px-1 px-[5rem] ">
         <div class="w-[150px] h-20 hidden md:block "></div>
         <div class="flex flex-col lg:flex-row  items-center text-white gap-3 mt-[100px]">
              <img src="../assets/image/setradio.png" class="w-[24rem] h2" alt="">
@@ -30,7 +30,7 @@
           <div v-for="item in music" :key="item.id"  class="flex justify-between w-full  text-white  rounded-[1rem] items-center gap bg-primary py-4 px-4">
           <div class="flex items-center ">
             <div class="flex items-center  gap-10">
-              <img v-bind:src="item.image" class=" w-[40px]  " alt="">
+              <img v-bind:src="item.image" class=" w-[40px] hover:skew-y-12 " alt="">
            <img src="../assets/image/heart1.png" alt="" class="w-5 h-5">
             </div>
             
@@ -53,7 +53,7 @@ import album from '../assets/image/Rectangle17.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
 import album4 from '../assets/image/album2.png'
-import play from '../components/play.vue'
+
 export default {
   data(){
     return{

@@ -10,9 +10,13 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vueuse/sound": "^2.0.1",
     "pinia": "^2.0.36",
+    "use-sound": "^4.0.1",
     "vue": "^3.3.2",
-    "vue-router": "^4.2.0"
+    "vue-audio-visual": "^3.0.5",
+    "vue-router": "^4.2.0",
+    "vue-use-sound": "^1.1.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.33.0",

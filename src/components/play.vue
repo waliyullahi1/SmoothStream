@@ -1,71 +1,141 @@
 <template>
-  <div class="abslute">
-    
-    <div class=" bg-opacity-50 bg-primary w-full h-[4rem] ">
-      <div class="fixed lg:flex block  justify-between  w-full right-   py-7 shadows -bottom-0 shadows h-[90px]  border-t border-t-white blurr"> 
-            <div class="w-[150px]"></div>
-            <div class="container flex justify-between items-center  px-4">
-                <div class="flex  gap-3 text-white">
-                  <img src="../assets/image/aalbum3.png" class="w-10 md:w-20 " alt="">
-                    <div class="">
-                      <h1 class="text-xl   font-semibold">Season in</h1>
-                      <p class="text-14px  ">james</p>
-                    </div>
-                </div>
-                <div>
-                <div class="flex gap-7 items-center justify-center  2349061976405">
-                    <img src="../assets/image/shuffle.png" class="w-7 h-7 md:flex hidden" alt="">
-                    <img src="../assets/image/previous.png" class="w-7 h-7 md:flex hidden" alt="">
-                    <img src="../assets/image/frameq.png" class="w-[3rem] " alt="">
-                    <img src="../assets/image/next.png" class="w-7 h-7" alt="">
-                    <img src="../assets/image/repeate-one.png" class="w-7 h-7 md:flex hidden" alt="">
-                </div>
 
-                <div>
-                  <input type="range" value="30" class=" bg-primary mt-4 w-96 range md:flex hidden h-2 rounded-xl">
-                </div><img src="../assets/image/group.png"  class=" hidden" alt="">
-                </div>
-                <div class=" justify w-1/5 md:flex hidden gap-3">
-                <img src="../assets/image/volume-high.png" alt="" class="w-5 h-5">
-                <img src="../assets/image/group.png" class="w- h-5" alt="">
-                </div>
-            </div>
-            
+  <div class="flex blurr fixed bottom-0  lg:flex   justify-between  w-full right-   py-7 shadows  shadows h-[90px]  border-t border-t-white blurr ">
+    <div class="flex mx-auto py-5 px-5 justify-between items-center w-5/6">
+      <div class="flex   gap-3 text-white">
+     <img src="../assets/image/aalbum3.png" class="w-10 md:w-20 " alt="">
+        <div class="">
+          <h1 class="text-xl   font-semibold">Season in</h1>
+          <p class="text-14px  ">james</p>
         </div>
-    </div>
+      </div>
+     <div class="">
+       <div class="text-white flex gap-10 justify-between items-center bg-black">
+
+        <img src="../assets/image/shuffle.png" class="w-7 h-7 md:flex hidden" alt="">
+
+          <div @click="changectx" class="">
+            <button @click="prevAudio">
+          <img class="w-7" src="../assets/image/previous.png" alt="" >
+            </button>
+          </div>
+
+        <div @click="change()">
+
+          <button  :class="contol ? 'hidden' :'block'" @click="playAudio">
+          <img  class="w-7" src="../assets/image/play.svg" alt="" >
+        </button>
+        
+        <button class="" :class="contol ? 'block' :'hidden'"  @click="pauseAudio">
+          <span ><img class="w-7" src="../assets/image/pause.svg" alt="" ></span>
+        </button>
+
+        </div>
+
+
+        <div @click="changectx()" class="">
+          <button @click="nextAudio"> 
+            <img class="w-7" src="../assets/image/next.png" alt="" >
+          </button>
+        </div>
+        
+        <button class="hidden " @click="stopAudio">Stop</button>
+        <img   src="../assets/image/repeate-one.png" class="w-7 h-7 md:flex hidden" alt="">
+        
+      </div>
+      <input class="w-full " type="range" name="" v-model="currentTime" id="">
+
+     </div>
+     <div class="flex justify-center gap-5 items-center">
+      <img  class="w-7" src="../assets/image/volume-high.png" alt="">
+       <input class="w-full " type="range" name="" v-model="currentTime" id="">
+     </div>
+   </div>
   </div>
+   
 </template>
 
 <script>
-export default {
+import { ref, reactive } from 'vue';
+import audioSrc1 from '@/assets/music1.mp3';
+import audioSrc2 from '@/assets/music2.mp3';
+import audioSrc3 from '@/assets/music3.mp3';
 
-}
+export default {
+  setup() {
+    const state = reactive({
+      audioSources: [audioSrc1, audioSrc2, audioSrc3],
+      currentAudioIndex: 0,
+    });
+    const audio = ref(new Audio(state.audioSources[state.currentAudioIndex]));
+
+    const playAudio = () => {
+      if (audio.value.paused) {
+        audio.value.play();
+      }
+    };
+
+    const pauseAudio = () => {
+      if (!audio.value.paused) {
+        audio.value.pause();
+      }
+    };
+
+    const stopAudio = () => {
+      if (!audio.value.paused) {
+        audio.value.pause();
+        audio.value.currentTime = 0;
+      }
+    };
+
+    const nextAudio = () => {
+     
+      if (state.currentAudioIndex < state.audioSources.length - 1) {
+        state.currentAudioIndex++;
+        audio.value.src = state.audioSources[state.currentAudioIndex];
+        playAudio();
+      }
+    };
+
+    const prevAudio = () => {
+      if (state.currentAudioIndex > 0) {
+        state.currentAudioIndex--;
+        audio.value.src = state.audioSources[state.currentAudioIndex];
+        playAudio();
+      }
+    };
+
+    return {
+      playAudio,
+      pauseAudio,
+      stopAudio,
+      nextAudio,
+      prevAudio,
+    };
+  },
+
+  data() {
+    return {
+      contol: false
+    }
+  },
+  methods:{
+    change(){
+      this.contol = !this.contol
+    },
+
+    
+    changectx(){
+       this.contol = true
+    }
+  }
+};
 </script>
 
-<style>
+
+<style scoped>
 .blurr{
-       backdrop-filter: blur(500px);
+       backdrop-filter: blur(5px);
      
-    }
-
-    .shadows{
-    box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
-    -webkit-box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
-    -moz-box-shadow: -1px 3px 49px -10px rgba(0,0,0,0.29);
-    }
-
-    .range{
-      -webkit-appearance: none;
-       background: rgb(77, 77, 61);
-
-    }
-    .range::-webkit-slider-thumb {
-       -webkit-appearance:media-slider;
-       background: yellow;
-       color: yellowgreen;
-       width: 10px;
-       height: 10px;
-       border-radius: 100px;
-       border: 2px white solid;
     }
 </style>

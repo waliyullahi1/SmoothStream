@@ -5,13 +5,14 @@
     
     
 
-   <section class="ml-0">
+   <section class="ml-0 ">
     <div class="block gap-10 md:flex  mr-8">
       <Header></Header>
+      
       <div class=" md:flex block">
         <div class="lg:w-[150px] w-[100px]"></div>
       <div class="md:block mt-20 lg:flex mx-2 containe w-full block">
-       <div class=" bg-[#609eaf] md:mt-[25px] flex  justi rounded-[2rem] lg:w-2/3 w-full h- overflow-hidden"> 
+       <div class=" bg-[#609eaf] md:mt-[25px] flex  justi rounded-[2rem]   <input type=range v-model=rangeValue lg:w-2/3 w-full h- overflow-hidden"> 
         <div class="w-full  flex flex-col justify-between py-10 pl-7 text-white font-normal text-xl">
           <h1 class="mb-20 md:mb-5">Currated playlist</h1>
           <div class="f" >
@@ -116,7 +117,7 @@ export default {
                     {
                          id: 2,
                         image:album2,
-                        header:'Reggae "n"  blues',
+                        header:'Reggae "n"uf 8888  blues',
                         des: 'DJ YK Mule',
                         time:'12:00:34',  
                     },

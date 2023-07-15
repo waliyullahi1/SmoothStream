@@ -19,11 +19,11 @@
            <div class="flex flex-col rounded-[2rem] justify-center bg-tertiary items-center py-5 px-5 gap-7">
           <router-link to="/"> <img src="../assets/image/home.png" class="hover:chbtn w-[20px] transform hover:scale-125 duration-700" /> </router-link>
           <router-link to="/view"> <img src="../assets/image/playlist.png" class=" hover:chbtn w-[24px] hover:scale-125 duration-700 chbtn" /> </router-link>
-          <router-link to="/"> <img src="../assets/image/radio.png" class=" hover:chbtn w-[24px] hover:scale-125 duration-700" /> </router-link>
+          <router-link to="/collection"> <img src="../assets/image/radio.png" class=" hover:chbtn w-[24px] hover:scale-125 duration-700" /> </router-link>
           <router-link to="/"> <img src="../assets/image/horizontal.png" class=" hover:chbtn w-[24px] hover:scale-125 duration-700" /> </router-link>
         </div>
         <div class="flex mt-5 flex-col justify-center rounded-[2rem] bg-tertiary items-center py-5 gap-7">
-          <router-link to="/"> <img src="../assets/image/frame.png" class=" hover:chbtn w-[24px] hover:scale-125 duration-700" /> </router-link>
+          <router-link to="/"> <img src="../assets/image/frame.png" class=" hover: chbtn w-[24px] hover:scale-125 duration-700" /> </router-link>
           <router-link to="/"> <img src="../assets/image/das.png" class="w-[24px] hover:scale-125 duration-700" /> </router-link>
         </div>
        </div>
