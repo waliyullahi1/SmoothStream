@@ -11,8 +11,8 @@
       
       <div class=" md:flex block">
         <div class="lg:w-[150px] w-[100px]"></div>
-      <div class="md:block mt-20 lg:flex mx-2 containe w-full block">
-       <div class=" bg-[#609eaf] md:mt-[25px] flex  justi rounded-[2rem]   <input type=range v-model=rangeValue lg:w-2/3 w-full h- overflow-hidden"> 
+      <div class="md:block  lg:flex mx-2 containe w-full block">
+       <div class=" bg-[#609eaf] md:mt-[90px] flex  justi rounded-[2rem]   <input type=range v-model=rangeValue lg:w-2/3 w-full  overflow-hidden"> 
         <div class="w-full  flex flex-col justify-between py-10 pl-7 text-white font-normal text-xl">
           <h1 class="mb-20 md:mb-5">Currated playlist</h1>
           <div class="f" >
@@ -67,16 +67,17 @@
     <div class="md:flex block  w-fu">
       <div class="lg:w-[150px] w-[100px]"></div>
    
-      <div  class="w-full px-4 overflow-hidden ">
+      <div    class="w-full px-4 overflow-hidden  ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
         <div class="w-[100rem] mx-4 overflow-scroll">
           <div class="flex  gap-3 md:w-[2500px]  w-[2000px] text-white">
-          <div v-for="item in musics" :key="item.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
+          <div   @click="saveToLocalStorages(item.id)" v-for="item in musics" :key="item.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
                <div class="">
                  
                  <img  v-bind:src="item.image" alt="" class="md:w-[2500px] :w-[1500px]"/>
                   <div>
                     <h1 class="text-[18px] my-0 font-normal ">{{item.header}}</h1>
+                    <primarybtn class="flex justify-end" @buttonClicked="playAudioById()"> ../assets/image/play.svg" alt=""></primarybtn>
                   </div>
                </div>
                 
@@ -95,6 +96,9 @@
 </template>
 
 <script>
+
+ 
+
 import album from '../assets/image/Rectangle17.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
@@ -304,6 +308,17 @@ export default {
                 ]
             }
         },
+
+        methods:{
+          saveToLocalStorages(id) {
+    const clickedItem = this.music.find((item) => item.id === id);  
+        const savedItems = JSON.parse(localStorage.getItem('savedItems')) || []
+      savedItems.push(clickedItem);
+      localStorage.setItem('savedItems', JSON.stringify(savedItems));
+   
+  },
+
+        }
 
 }
 </script>

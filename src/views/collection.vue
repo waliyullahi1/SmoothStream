@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-primary  font-[Quicksand]  w-full">
+  <div class="bg-primary  font-[Quicksand] h-screen overflow-scroll  w-full">
      <Header></Header>
-     <div class="flex mt-9">
+     <div class="flex mt-10">
         <div class="lg:w-[150px] md:w-[100px] md:block hidden"></div>
         <div class="mt-20">
            <div class="flex gap-5">
@@ -11,7 +11,9 @@
 
          
              <div class="mt-10 grid md:grid-cols-4 lg:grid-cols-5 grid-cols-1 w-full  gap-4 px-4 "   >
-            <div v-for="item in music" :key="item.id" class="flex lg:h-[200px] md:h-[150px] h-[300px] rounded-[1.5rem] overflow-hidden flex-col justify-center items-center">
+             <div v-for="item in music" :key="item.id" class="flex lg:h-[200px] md:h-[150px] h-[300px] rounded-[1.5rem] overflow-hidden flex-col justify-center items-center">
+
+
                 <img v-bind:src="item.image"  class=" w md:w-64" alt="">
                 
                 <div class="text-whte flex justify-between  bg-gradient-to-t from-primary text-white  md:-top-[80px] -top-[150px] md:pl-6 px-5  bg-wite w-full py-5 relative ">
@@ -24,6 +26,8 @@
                 </div>
             </div>
           
+
+         
           </div>
         </div>
      </div>
@@ -37,185 +41,14 @@ import album4 from '../assets/image/album2.png'
 export default {
    data(){
             return{
-               
-                music:[
-                    {
-                        id: 1,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder'
-                   },
-
-                   {
-                        id: 2,
-                        image: album2,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                    
-                      {
-                        id: 3,
-                        image: album3,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },   
-
-                    {
-                        id: 4,
-                        image: album4,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                   
-                    {
-                        id: 5,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-
-                    {
-                        id: 7,
-                        image: album2,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-                          {
-                        id: 1,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder'
-                    },
-
-                   {
-                        id: 2,
-                        image: album2,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                    
-                      {
-                        id: 3,
-                        image: album3,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },   
-
-                    {
-                        id: 4,
-                        image: album4,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                   
-                    {
-                        id: 5,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-
-                    {
-                        id: 7,
-                        image: album2,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-                          {
-                        id: 1,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder'
-                    },
-
-                   {
-                        id: 2,
-                        image: album2,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                    
-                      {
-                        id: 3,
-                        image: album3,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },   
-
-                    {
-                        id: 4,
-                        image: album4,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                   
-                    {
-                        id: 5,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-
-                    {
-                        id: 7,
-                        image: album2,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-
-                          {
-                        id: 1,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder'
-                    },
-
-                   {
-                        id: 2,
-                        image: album2,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                    
-                      {
-                        id: 3,
-                        image: album3,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },   
-
-                    {
-                        id: 4,
-                        image: album4,
-                        header:'Golden age of 80s', 
-                         des: 'Sean swadder'
-                    },
-
-                   
-                    {
-                        id: 5,
-                        image: album,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-
-                    {
-                        id: 7,
-                        image: album2,
-                        header:'Golden age of 80s',
-                         des: 'Sean swadder' 
-                    },
-                ],
-
+            music : JSON.parse(localStorage.getItem("savedItems")  ) 
+              
             }
         },
+
+        created(){
+         console.log(this.music)
+        }
 }
 </script>
  
