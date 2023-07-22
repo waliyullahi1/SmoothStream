@@ -23,11 +23,11 @@
 
         <div @click="change()">
 
-          <button  :class="contol ? 'hidden' :'block'" @click="playAudio">
+          <button  :class="contol ? 'hidden' :'block'" @click="play">
           <img  class="w-7" src="../assets/image/play.svg" alt="" >
         </button>
         
-        <button class="" :class="contol ? 'block' :'hidden'"  @click="pauseAudio">
+        <button class="" :class="contol ? 'block' :'hidden'"  @click="pause">
           <span ><img class="w-7" src="../assets/image/pause.svg" alt="" ></span>
         </button>
 
@@ -44,12 +44,12 @@
         <img   src="../assets/image/repeate-one.png" class="w-7 h-7 md:flex hidden" alt="">
         
       </div>
-      <input class="w-full" type="range" v-model="currentTime" min="0" :max="duration" @input="onInput" />
+      <input class="w-full" type="range" v-model="audioStore.currentTime" min="0" :max="audioStore.duration" @input="onInput"/>
 
      </div>
      <div class="flex justify-center gap-5 items-center">
       <img  class="w-7" src="../assets/image/volume-high.png" alt="">
-        <input type="range" v-model="volume" min="0" max="1" step="0.01" @input="onVolumeInput" />
+         <input type="range" v-model="volume" min="0" max="1" step="0.01" @input="onVolumeInput" />
      </div>
    </div>
   </div>
@@ -57,7 +57,9 @@
 </template>
 
 <script>
+import { computed } from "vue";
 import { ref, reactive } from 'vue';
+import { useAudioStore } from "@/stores/counter.js";
 import audioSrc1 from '@/assets/music1.mp3';
 import audioSrc2 from '@/assets/music2.mp3';
 import audioSrc3 from '@/assets/music3.mp3';
@@ -65,250 +67,99 @@ import imageO from'../assets/image/setradio.png';
 import image1 from'../assets/image/bookhand.png';
 import image2 from'@/assets/image/setradio.png';
 export default {
- setup() {
-  const state = reactive({
-    audioSources: [
-      {
-        id:1,
-        scr:audioSrc1,
-        name:'asake',
-        img:imageO
-      },
+  setup() {
+   const audioStore = useAudioStore();
+  const volume = useAudioStore();
+  const audioSources = [
+    {
+      id: 1,
+      src: audioSrc1,
+      name: "asake",
+      img: imageO,
+    },
+    {
+      id: 2,
+      src: audioSrc2,
+      name: "olujoke",
+      img: image1,
+    },
+    {
+      id: 3,
+      src: audioSrc3,
+      name: "ammu",
+      img: image2,
+    },
+  ];
+  const audioSource = audioStore.audioSources;
+  console.log(audioSource);
 
-      {
-        id:2,
-        scr:audioSrc2,
-        name:'olujoke',
-        img:image1
-      },
+    function onInput() {
+      
+      audioStore.onInput()
+    }
 
-       {
-        id:3,
-        scr:audioSrc3,
-        name:'ammu',
-        img:image2
-      },
-
-
-    ],
-    currentAudioIndex: 0,
    
-  });
 
+  const play = () => {
+    audioStore.playAudio(audioSources);
+   console.log(audioStore.currentAudio)
+  };
 
-  const audio = ref(new Audio(state.audioSources[state.currentAudioIndex].scr),);
-  const duration = ref(0);
-  const currentTime = ref(0);
-  const volume = ref(1); 
-  const currentAudioName = ref(state.audioSources[state.currentAudioIndex].name);
-   const currentAudioImge = ref(state.audioSources[state.currentAudioIndex].img);
-   const audioSources1 = state.audioSources;
- 
-  //  const fetchTrackData = async (id) => {
-  //   try {
     
-  //     const response = await axios.get(`https://deezerdevs-deezer.p.rapidapi.com/playlist/%7Bid%7D${id}`);
-  //     const trackData = response.data;
+  const pause = () => {
+    console.log("Pause button clicked" );
+    audioStore.pauseAudio(audioStore.currentTime);
+  };
+
+  const stop = () => {
+   
+   
+    audioStore.stopAudio(audioStore.currentTime);
+  };
+
+  const next = () => {
+   
+    audioStore.nextAudio(audioSources);
+  };
+
+  const prev = () => {
+    
+    audioStore.prevAudio(audioSources);
+  };
+  const playId = (id) => {
+     audioStore.playAudioById(id, audioSources);
+      audioStore.playAudio(audioSources)
       
-  //     const newAudioSource = {
-  //       id: trackData.id,
-  //       scr: trackData.preview,
-  //       name: trackData.title,
-  //       img: trackData.album.cover_medium
-  //     };
-      
-  //     state.audioSources.push(newAudioSource);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  };
  
-// async function getDeezerData() {
-//   const response = await fetch('https://deezerdevs-deezer.p.rapidapi.com/infos', {
-//     headers: {
-//       'x-rapidapi-key': '58a548114dmsh3969372ffd5a6c5p1bbe72jsn756019f1dd9b',
-//       'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com'
-//     }
-//   });
-//   const data = await response.json();
-//   state.audioSources = data.tracks.data.map(track => ({
-//     scr: track.preview,
-//     name: track.title,
-//     img: track.album.cover_medium
-//   }));
-//   audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-//   currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-//   currentAudioImge.value = state.audioSources[state.currentAudioIndex].img;
-// };
-
-// async function getDeezerData() {
-//     try {
-//       const response = await axios.get('https://deezerdevs-deezer.p.rapidapi.com/playlist/%7Bid%7D', {
-//         headers: {
-//           'x-rapidapi-key': '58a548114dmsh3969372ffd5a6c5p1bbe72jsn756019f1dd9b',
-//           'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com'
-//         }
-//       });
-//       state.audioSources = response.data.tracks.data.map(track => ({
-//         scr: track.preview,
-//         name: track.title,
-//         img: track.album.cover_medium
-//       }));
-//       audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-//       currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-//       currentAudioImge.value = state.audioSources[state.currentAudioIndex].img;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-
-// try {
-// 	const response = await axios.request(options);
-// 	console.log(response.data);
-// } catch (error) {
-// 	console.error(error);
-// }
-// getDeezerData();
-  
-
-  audio.value.addEventListener('loadedmetadata', () => {
-    duration.value = audio.value.duration;
-  
-     
-  });
-
-  audio.value.addEventListener('timeupdate', () => {
-    currentTime.value = audio.value.currentTime;
-   currentAudioName.value = state.audioSources[state.currentAudioIndex].name
-     currentAudioImge.value= state.audioSources[state.currentAudioIndex].img;
-   
-  });
-
-    audio.value.addEventListener('ended', () => {
-  if (state.currentAudioIndex < state.audioSources.length - 1) {
-    state.currentAudioIndex++;
-    audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-    currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-
-   
-    playAudio();
+const currentAudio = computed(() => {
+  if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
+    return audioStore.audioSources[audioStore.currentAudioIndex];
   } else {
-    state.currentAudioIndex = 0;
-    audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-    currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-   
-    playAudio();
+    return null;
   }
 });
 
-   
-
-  const onInput = () => {
-    audio.value.currentTime = currentTime.value;
-  };
-
-  const onVolumeInput = () => {
-    audio.value.volume = volume.value;
-    currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-     currentAudioImge.value = state.audioSources[state.currentAudioIndex].img
-  
-  };
-
-  const playAudio = () => {
-     if (audio.value.paused) {
-      audio.value.play();
-      
-     }
-  };
-
-  const pauseAudio = () => {
-    if (!audio.value.paused) {
-      audio.value.pause();
-       currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-       console.log(currentAudioImge)
-    }
-  };
-
-  const stopAudio = () => {
-    if (!audio.value.paused) {
-      audio.value.pause();
-      audio.value.currentTime = 0;
-    }
-  };
-
-  // const nextAudio = () => {
-  //   if (state.currentAudioIndex < state.audioSources.length - 1) {
-  //     state.currentAudioIndex++;
-  //     audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-  //     const currentAudioName = ref(state.audioSources[state.currentAudioIndex].name);
-  //     playAudio();
-      
-  //   }else{
-  //     state.currentAudioIndex = 0;
-  //     audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-  //      playAudio();
-  //   }
-  // };
-
-  const prevAudio = () => {
-    if (state.currentAudioIndex > 0) {
-      state.currentAudioIndex--;
-      audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-      playAudio();
-      currentAudioName.value = state.audioSources[state.currentAudioIndex].name;
-    }
-  };
-
-   const playThirdAudio = () => {
-    state.currentAudioIndex = 2;
-    audio.value.src = state.audioSources[state.currentAudioIndex];
-    const currentAudioName = ref(state.audioSources[state.currentAudioIndex].name);
-    playAudio();
-  };
-
-  const playAudioById = (id) => {
-    const index = state.audioSources.findIndex(source => source.id === id);
-    if (index !== -1) {
-      state.currentAudioIndex = index;
-      audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-      playAudio();
-       
-      }
-    };
-
-const nextAudio = () => {
-  if (state.currentAudioIndex < state.audioSources.length - 1) {
-    state.currentAudioIndex++;
-    audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-    playAudio();
-  } else {
-    // Handle the case where there are no more audio sources to play
-    // For example, you can reset the currentAudioIndex to 0 to start over from the beginning
-    state.currentAudioIndex = 0;
-    audio.value.src = state.audioSources[state.currentAudioIndex].scr;
-    playAudio();
-  }
-};
-   
-    return {
-    playAudio,
-    pauseAudio,
-    stopAudio,
-    nextAudio,
-    prevAudio,
-    duration,
-    currentTime,
-    onInput,
-    volume,
-    onVolumeInput,
-    currentAudioName,
-    currentAudioImge,
-    audioSources1,
-    playThirdAudio,
-     playAudioById,
-     audioSources: state.audioSources,
-     
-
+  return {
+    play,
+    pause,
+    stop,
+    next,
+    prev,
+    playId,
+  onInput,
+  volume,
+    audioStore,
+    audioSources,
+   audioSource,
+    currentAudio,
+   duration:audioStore.duration,
+   currentTime:audioStore.currentTime,
+   image:audioStore.image,
+   onVolumeInput: audioStore.onVolumeInput,
+   currentName : audioStore.currentName,
+   currentImage: audioStore.currentImage,
+   onInput: audioStore.onInput,
   };
 },
 

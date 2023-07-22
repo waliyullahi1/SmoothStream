@@ -103,9 +103,41 @@ import album from '../assets/image/Rectangle17.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
 import album4 from '../assets/image/album2.png'
-import play from '../components/play.vue'
+import { useAudioStore } from "@/stores/counter.js";
 export default {
- components: { play },
+ setup(){
+  const audioStore = useAudioStore()
+const audioSources = [
+    {
+      id: 1,
+      src: audioSrc1,
+      name: "asake",
+      img: imageO,
+    },
+    {
+      id: 2,
+      src: audioSrc2,
+      name: "olujoke",
+      img: image1,
+    },
+    {
+      id: 3,
+      src: audioSrc3,
+      name: "ammu",
+      img: image2,
+    },
+  ];
+
+   const play = () => {
+    audioStore.playAudio(audioSources);
+   console.log(audioStore.currentAudio)
+  };
+
+  return{
+    
+    audioSources
+  }
+ },
  data(){
             return{
                
