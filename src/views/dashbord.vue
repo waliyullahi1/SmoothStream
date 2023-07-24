@@ -41,14 +41,14 @@
       </div>
       <div class=" lg:w-1/3 w-full  mt-[25px] ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
-        <div class="flex flex-col mt-6 gap-2 text-white overflow-hidden h-[20rem] ">
-            <div v-for="item in music" :key="item.id" class="flex gap-3 bg-tertiary  items-center justify-between rounded-[2rem] w-full py-2 px-4  ">
-               <div class="flex gap-3">
+        <div class="flex flex-col mt-6 gap-2 text-white overflow-x-scroll  h-[20rem] ">
+            <div v-for="item in audioSources" @click="playId(item.id)"  :key="item.id" class="flex gap-3 bg-tertiary  items-center justify-between rounded-[2rem] w-full py-2 px-4  ">
+               <div  @click=" playIdi()" class="flex gap-3">
                  
-                 <img  v-bind:src="item.image" alt="" class="w-[5rem]"/>
+                 <img @click="playId"  v-bind:src="item.img" alt="" class="w-[5rem]"/>
                   <div>
                     <h1 class="text-[18px] my-0 font-normal ">{{item.header}}</h1>
-                      <h1 class="my-0 text-[14px] text-normal text-gray-400" >{{item.des}}r</h1>
+                      <h1 class="my-0 text-[14px] text-normal text-gray-400" >{{item.name}}r</h1>
                       <h1>{{item.time}}</h1>
                   </div>
                </div>
@@ -69,15 +69,15 @@
    
       <div    class="w-full px-4 overflow-hidden  ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
-        <div class="w-[100rem] mx-4 overflow-scroll">
+        <div class="w-[100rem] mx-4 overflow-srcoll">
           <div class="flex  gap-3 md:w-[2500px]  w-[2000px] text-white">
-          <div   @click="saveToLocalStorages(item.id)" v-for="item in musics" :key="item.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
+          <div   @click="saveToLocalStorages(item.id)" v-for="source in audioSources" :key="source.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
                <div class="">
                  
-                 <img  v-bind:src="item.image" alt="" class="md:w-[2500px] :w-[1500px]"/>
+                 <img  v-bind:src="source.img" alt="" class="md:w-[2500px] :w-[1500px]"/>
                   <div>
-                    <h1 class="text-[18px] my-0 font-normal ">{{item.header}}</h1>
-                    <primarybtn class="flex justify-end" @buttonClicked="playAudioById()"> ../assets/image/play.svg" alt=""></primarybtn>
+                    <h1 class="text-[18px] my-0 font-normal ">{{source.header}}</h1>
+                    <primarybtn class="flex justify-end" @click="playId(source.id)"> ../assets/img/play.svg" alt=""></primarybtn>
                   </div>
                </div>
                 
@@ -87,7 +87,7 @@
       </div>
     </div>
    </section>
-   <play></play>
+   <play @change="change()"  @next="next"  :contol='contol'></play>
    <div class="fle w-30" >
 
    </div>
@@ -96,263 +96,246 @@
 </template>
 
 <script>
-
- 
-
+import { watchEffect } from "vue"
+import { onMounted, onBeforeUnmount } from 'vue';
+import { computed } from "vue";
+import dash1 from "@/assets/dashmusic1.mp3";
+import dash2 from "@/assets/dashmusic2.mp3";
+import dash3 from "@/assets/dashmusic3.mp3";
+import dash4 from "@/assets/dashmusic4.mp3";
+import dash5 from "@/assets/dashmusic5.mp3";
+import dash6 from "@/assets/dashmusic6.mp3";
+import dash7 from "@/assets/dashmusic7.mp3";
 import album from '../assets/image/Rectangle17.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
 import album4 from '../assets/image/album2.png'
 import { useAudioStore } from "@/stores/counter.js";
+import { reactive, ref } from "vue";
 export default {
- setup(){
-  const audioStore = useAudioStore()
-const audioSources = [
+  name: "YourComponent",
+ setup() {
+   const audioStore = useAudioStore();
+  const volume = useAudioStore();
+  const audioSources = [
     {
-      id: 1,
-      src: audioSrc1,
-      name: "asake",
-      img: imageO,
-    },
-    {
-      id: 2,
-      src: audioSrc2,
-      name: "olujoke",
-      img: image1,
-    },
-    {
-      id: 3,
-      src: audioSrc3,
-      name: "ammu",
-      img: image2,
-    },
-  ];
-
-   const play = () => {
-    audioStore.playAudio(audioSources);
-   console.log(audioStore.currentAudio)
-  };
-
-  return{
-    
-    audioSources
-  }
- },
- data(){
-            return{
-               
-                music:[
-                    {
                         id: 1,
-                        image: album,
-                        header:'Golden age of 80s',
-                        des: 'Sean swadder',
-                       time:'12:00:34',   
-                    },
-
-                    {
-                         id: 2,
-                        image:album2,
-                        header:'Reggae "n"uf 8888  blues',
-                        des: 'DJ YK Mule',
-                        time:'12:00:34',  
-                    },
-
-                    {
-                         id: 3,
-                        image:album3,
-                        header:'Tomorrow’s tunes',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
-                    },
-
-
-                     {
-                         id: 4,
-                        image:album4,
-                        header:'Tomorrow’s tunes',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
-                    },
-
-                   
-                    {
-                         id: 5,
-                        image:album2,
-                        header:'Tomorrow’s tunes',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
-                    },
-
-                    {
-                         id: album2,
-                        image:123212,
-                        header:'Tomorrow’s tunes',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
-                    },
-
-                    
-
-                  
-
-
-                   
-
-
-
-               
-
-
-                    
-                ],
-
-                 musics:[
-                    {
-                        id: 1,
-                        image: album,
+                        img: album4,
                         header:'Golden ',
-                        des: 'Sean swadder',
-                       time:'12:00:34',   
+                        name: 'Sean swadder',
+                       time:'12:00:34', 
+                        src: dash3,  
                     },
 
                     {
                          id: 2,
-                        image:album2,
+                        img:album2,
                         header:'Reggae ',
-                        des: 'DJ YK Mule',
-                        time:'12:00:34',  
+                        name: 'DJ YK Mule',
+                        time:'12:00:34', 
+                         src: dash1, 
                     },
 
                     {
                          id: 3,
-                        image:album3,
+                        img:album3,
                         header:'Tomorrow’s',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash2,   
                     },
 
 
                      {
                          id: 4,
-                        image:album4,
+                        img:album4,
                         header:'Tomorrow’s s',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash4,  
                     },
 
                    
                     {
                          id: 5,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash5,  
                     },
 
                     {
                          id: 6,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash6,  
                     },
 
                     {
                          id: 8,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash7,   
                     },
 
                      {
                          id: 5,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash3,   
                     },
                     {
                          id: 9,
-                        image:album3,
+                        img:album3,
                         header:'Tomorrow’s',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash1,   
                     },
 
                     {
                          id: 8,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash2,  
                     },
 
                      {
                          id: 5,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash4,  
                     },
                     {
                          id: 9,
-                        image:album3,
+                        img:album3,
                         header:'Tomorrow’s',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash6,   
                     },
 
                     {
                          id: 8,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash5,   
                     },
 
                      {
                          id: 5,
-                        image:album2,
+                        img:album2,
                         header:'Tomorrow’',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash7   
                     },
                     {
                          id: 9,
-                        image:album3,
+                        img:album3,
                         header:'Tomorrow’s',
-                        des: 'Obi Datti',
-                        time:'12:00:34',   
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash3,   
                     },
-                  
+  ];
+  const audioSource = audioStore.audioSources;
+  console.log(audioSource);
+ audioStore.initializeAudio(audioSources),
+    function onInput() {
+      
+      audioStore.onInput()
+    }
 
-
-                   
-
-
-
-               
-
-
-                    
-                ]
-            }
-        },
-
-        methods:{
-          saveToLocalStorages(id) {
-    const clickedItem = this.music.find((item) => item.id === id);  
-        const savedItems = JSON.parse(localStorage.getItem('savedItems')) || []
-      savedItems.push(clickedItem);
-      localStorage.setItem('savedItems', JSON.stringify(savedItems));
    
+
+  const play = () => {
+    audioStore.playAudio(currentName);
+   console.log(audioStore.currentAudio);
+  };
+
+    
+  const pause = () => {
+    console.log("Pause button clicked" );
+    audioStore.pauseAudio(audioStore.currentTime);
+  };
+
+  const stop = () => {
+   
+   
+    audioStore.stopAudio(audioStore.currentTime);
+  };
+
+  const next = () => {
+   
+    audioStore.nextAudio(audioSources);
+  };
+
+  const prev = () => {
+    
+    audioStore.prevAudio(audioSources);
+  };
+  const playId = (id) => {
+     audioStore.playAudioById(id, audioSources);
+      audioStore.playAudio(audioSources)
+      
+  };
+ 
+const currentAudio = computed(() => {
+  if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
+    return audioStore.audioSources[audioStore.currentAudioIndex];
+  } else {
+    return null;
+  }
+});
+
+ return {
+    play,
+    pause,
+    stop,
+    next,
+    prev,
+    playId,
+ 
+  volume,
+    audioStore,
+    audioSources,
+   audioSource,
+    currentAudio,
+   duration:audioStore.duration,
+   currentTime:audioStore.currentTime,
+   image:audioStore.image,
+   onVolumeInput: audioStore.onVolumeInput,
+   currentName : audioStore.currentName,
+   currentImage: audioStore.currentImage,
+   onInput: audioStore.onInput,
+  };
+},
+
+ methods:{
+  change(){
+    this.contol = !this.contol
   },
 
-        }
+  playIdi(){
+     this.contol = !this.contol
+  }
+ }
 
-}
+};
 </script>
 
 <style>
@@ -360,4 +343,40 @@ const audioSources = [
        backdrop-filter: blur(5px);
      
     }
+
+    * {
+  scrollbar-width: thin;
+  scrollbar-color: #facd66 #1d2123;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #1d2123;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #1d2123;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #1d2123;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #725718;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #facd66;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #facd66;
+}
 </style>

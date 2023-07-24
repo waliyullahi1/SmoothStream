@@ -35,6 +35,7 @@
 
 <script>
 import { watchEffect } from "vue"
+import { onMounted, onBeforeUnmount } from 'vue';
 import { computed } from "vue";
 import audioSrc1 from "@/assets/music1.mp3";
 import audioSrc2 from "@/assets/music2.mp3";
@@ -119,7 +120,7 @@ const currentAudio = computed(() => {
   }
 });
 
-  return {
+ return {
     play,
     pause,
     stop,
@@ -137,10 +138,14 @@ const currentAudio = computed(() => {
    image:audioStore.image,
    onVolumeInput: audioStore.onVolumeInput,
    currentName : audioStore.currentName,
+   nextAudio : audioStore.nextAudio,
    currentImage: audioStore.currentImage,
    onInput: audioStore.onInput,
   };
 },
+
+ 
+
 };
 </script>
 

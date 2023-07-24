@@ -3,10 +3,10 @@
   <div class="flex blurr fixed bottom-0  lg:flex z-40 justify-between  w-full right-   py-7 shadows  shadows h-[90px]  border-t border-t-white blurr ">
     <div class="flex mx-auto py-5 px-5 justify-between items-center w-5/6">
       <div class="flex   gap-3 text-white">
-        <primarybtn class="flex justify-end" @buttonClicked="playAudioById()">Create New Task</primarybtn>
-     <img :src="currentAudioImge"  class="w-10 md:w-20 " alt="">
+       
+     <img :src="audioStore.currentImage"  class="w-10 md:w-20 " alt="">
         <div class="">
-          <h1 class="text-xl   font-semibold">{{currentAudioName}}</h1>
+          <h1 class="text-xl   font-semibold">{{audioStore.currentName}}</h1>
           <p class="text-14px  ">james</p>
         </div>
       </div>
@@ -35,7 +35,7 @@
 
 
         <div @click="changectx()" class="">
-          <button @click="nextAudio"> 
+          <button @click="audioStore.nextAudio"> 
             <img class="w-7" src="../assets/image/next.png" alt="" >
           </button>
         </div>
@@ -49,7 +49,7 @@
      </div>
      <div class="flex justify-center gap-5 items-center">
       <img  class="w-7" src="../assets/image/volume-high.png" alt="">
-         <input type="range" v-model="volume" min="0" max="1" step="0.01" @input="onVolumeInput" />
+         <input type="range" v-model="audioStore.volume" min="0" max="1" step="0.01" @input="audioStore.onVolumeInput" />
      </div>
    </div>
   </div>
@@ -67,71 +67,37 @@ import imageO from'../assets/image/setradio.png';
 import image1 from'../assets/image/bookhand.png';
 import image2 from'@/assets/image/setradio.png';
 export default {
+  props: {
+    contol: Boolean,
+  
+  },
   setup() {
    const audioStore = useAudioStore();
   const volume = useAudioStore();
   const audioSources = [
-    {
-      id: 1,
-      src: audioSrc1,
-      name: "asake",
-      img: imageO,
-    },
-    {
-      id: 2,
-      src: audioSrc2,
-      name: "olujoke",
-      img: image1,
-    },
-    {
-      id: 3,
-      src: audioSrc3,
-      name: "ammu",
-      img: image2,
-    },
+   
   ];
   const audioSource = audioStore.audioSources;
   console.log(audioSource);
-
+ 
     function onInput() {
       
       audioStore.onInput()
-    }
-
-   
-
-  const play = () => {
+    };
+    const play = () => {
     audioStore.playAudio(audioSources);
-   console.log(audioStore.currentAudio)
+  
   };
-
     
   const pause = () => {
     console.log("Pause button clicked" );
     audioStore.pauseAudio(audioStore.currentTime);
   };
 
-  const stop = () => {
-   
-   
-    audioStore.stopAudio(audioStore.currentTime);
-  };
-
-  const next = () => {
+    const next = () => {
    
     audioStore.nextAudio(audioSources);
   };
-
-  const prev = () => {
-    
-    audioStore.prevAudio(audioSources);
-  };
-  const playId = (id) => {
-     audioStore.playAudioById(id, audioSources);
-      audioStore.playAudio(audioSources)
-      
-  };
- 
 const currentAudio = computed(() => {
   if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
     return audioStore.audioSources[audioStore.currentAudioIndex];
@@ -141,27 +107,25 @@ const currentAudio = computed(() => {
 });
 
   return {
-    play,
-    pause,
-    stop,
-    next,
-    prev,
-    playId,
   onInput,
   volume,
+  pause,
+  next,
     audioStore,
     audioSources,
    audioSource,
     currentAudio,
    duration:audioStore.duration,
    currentTime:audioStore.currentTime,
-   image:audioStore.image,
+    play,
    onVolumeInput: audioStore.onVolumeInput,
    currentName : audioStore.currentName,
    currentImage: audioStore.currentImage,
    onInput: audioStore.onInput,
   };
 },
+
+
 
   data() {
     return {
@@ -171,12 +135,17 @@ const currentAudio = computed(() => {
   methods:{
     change(){
       this.contol = !this.contol
+       this.$emit("change",)
     },
-
+    next(){
+      this.$emit("next",)
+    },
     
     changectx(){
        this.contol = true
+        this.$emit("changectx",)
     },
+  
 
     emitClicked(){
       this.$emit('buttonClicked')

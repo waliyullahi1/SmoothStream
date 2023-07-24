@@ -1,7 +1,7 @@
 <template>
   <div>
- <div  class="w-full h-screen fixed z-0  left-0 -top-32"  v-for="itemn in  itemq" :key="itemn.id">
-        <img v-bind:src="itemn.image"  alt="" class="w-[1300px]  h-[1600px]" >
+ <div  class="w-full h-screen fixed z-0  left-0 -top-32">
+        <img v-bind:src="audioStore.currentName"  alt="" class="w-[1300px]  h-[1600px]" >
       </div>
   <div class="bg w-full bgg relative z-10  font-[Quicksand] h-fit">
    <div class="w-full bg-black  bg-opacity-75 bg-priary h-sc">
@@ -10,7 +10,7 @@
       <section class="flex relative z-0 md:mt-10 px-[5rem] ">
         <div class="w-[150px] h-20 hidden md:block "></div>
         <div class="flex flex-col lg:flex-row  items-center text-white gap-3 mt-[100px]">
-             <img src="../assets/image/setradio.png" class="w-[19rem] h2" alt="">
+             <img :src="audioStore.currentImage" class="w-[19rem] h2" alt="">
              <div class="flex flex-col gap-4">
                 <h1 class="text-3xl text-[#A4C7C6] mt-5 font-semibold">Tommorow's tunes</h1>
                 <p class="text-[#EFEEE0]">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit <br>amet   luctus venenatis</p>
@@ -49,7 +49,7 @@
         </div>
       </section>
    </div>
-   <play ></play>
+   <play  @next="next" ></play>
   </div>
 
 
@@ -67,7 +67,65 @@ import album4 from '../assets/image/album2.png'
 import audioSrc1 from '@/assets/music1.mp3';
 import audioSrc2 from '@/assets/music2.mp3';
 import audioSrc3 from '@/assets/music3.mp3';
+import { useAudioStore } from "@/stores/counter.js";
+import { watchEffect } from "vue"
+import { onMounted, onBeforeUnmount } from 'vue';
+import { computed } from "vue";
 export default {
+   setup() {
+   const audioStore = useAudioStore();
+  const volume = useAudioStore();
+  const audioSources = [
+   
+  ];
+  const audioSource = audioStore.audioSources;
+  console.log(audioSource);
+
+    function onInput() {
+      
+      audioStore.onInput()
+    };
+    const play = () => {
+    audioStore.playAudio(audioSources);
+   console.log(currentName)
+  };
+    
+  const pause = () => {
+    console.log("Pause button clicked" );
+    audioStore.pauseAudio(audioStore.currentTime);
+  };
+
+    const next = () => {
+   
+    audioStore.nextAudio(audioSources);
+  };
+const currentAudio = computed(() => {
+  if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
+    return audioStore.audioSources[audioStore.currentAudioIndex];
+  } else {
+    return null;
+  }
+});
+
+  return {
+  onInput,
+  volume,
+  pause,
+  next,
+    audioStore,
+    audioSources,
+   audioSource,
+    currentAudio,
+   duration:audioStore.duration,
+   currentTime:audioStore.currentTime,
+    play,
+   onVolumeInput: audioStore.onVolumeInput,
+   currentName : audioStore.currentName,
+   currentImage: audioStore.currentImage,
+   onInput: audioStore.onInput,
+  };
+},
+
   data(){
     return{
      
