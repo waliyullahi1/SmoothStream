@@ -1,7 +1,7 @@
 <template>
   <div>
- <div  class="w-full h-screen fixed z-0  left-0 -top-32">
-        <img v-bind:src="audioStore.currentName"  alt="" class="w-[1300px]  h-[1600px]" >
+ <div  class="w-full h-screen fixed z-0   left-0 -top-32">
+        <img  :src="audioStore.currentImage"  alt="" class="md:w-full    md:h-w-full" >
       </div>
   <div class="bg w-full bgg relative z-10  font-[Quicksand] h-fit">
    <div class="w-full bg-black  bg-opacity-75 bg-priary h-sc">
@@ -12,7 +12,7 @@
         <div class="flex flex-col lg:flex-row  items-center text-white gap-3 mt-[100px]">
              <img :src="audioStore.currentImage" class="w-[19rem] h2" alt="">
              <div class="flex flex-col gap-4">
-                <h1 class="text-3xl text-[#A4C7C6] mt-5 font-semibold">Tommorow's tunes</h1>
+                <h1 class="text-3xl text-[#A4C7C6] mt-5 font-semibold">{{audioStore.currentName}}</h1>
                 <p class="text-[#EFEEE0]">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit <br>amet   luctus venenatis</p>
                 <p class="">64 songs ~ 16 hrs+</p>
                 <div class="flex gap-5">
@@ -31,18 +31,17 @@
       </section>
       <section class="flex mt-9 relative z-10">
          <div class="w-[150px] h-40 hidden md:block px-4"></div>
-        <div class="w-full h-[25rem]  overflow-scroll flex flex-col gap-2 m-10">
-          <div v-for="item in music" :key="item.id"  class="flex justify-between w-full  text-white  rounded-[1rem] items-center gap bg-primary py-4 px-4">
+        <div class="w-full h-[25rem] px-3 overflow-scroll flex flex-col gap-2 m-10">
+          <div v-for="item in itemForCollectin" :key="item.id" @click="playId(item.id,itemForCollectin)"  class="flex justify-between w-full m  text-white  rounded-[1rem] items-center gap bg-primary py-4 px-4">
           <div class="flex items-center ">
             <div class="flex items-center  gap-10">
-              <img v-bind:src="item.image" class=" w-[40px] hover:skew-y-12 " alt="">
+              <img v-bind:src="item.img" class=" w-[40px] hover:skew-y-12 " alt="">
            <img src="../assets/image/heart1.png" alt="" class="w-5 h-5">
             </div>
             
-          </div><p class="text-white">{{item.des}}</p>
-          <p class="text-center">{{item.status}}</p>
+          </div><p class="text-white">{{item.name}}</p>
+          <p class="text-center">{{item.header}}</p>
           <p>{{item.time}}</p>
-        <div @click="saveToLocalStorage(item.id)" class="w-ful flex justify-end"><img src="../assets/image/play.svg" class="flex w-5 justify-end" alt=""></div> 
         <div @click="saveToLocalStorages(item.id)" class="w-ful flex justify-end"><img src="../assets/image/play.svg" class="flex w-5 justify-end" alt=""></div> 
           
         </div>
@@ -59,10 +58,24 @@
 </template>
 
 <script>
-
-import album from '../assets/image/Rectangle17.png'
+import dash1 from "@/assets/dashmusic1.mp3";
+import dash2 from "@/assets/dashmusic2.mp3";
+import dash3 from "@/assets/dashmusic3.mp3";
+import dash4 from "@/assets/dashmusic4.mp3";
+import dash5 from "@/assets/dashmusic5.mp3";
+import dash6 from "@/assets/dashmusic6.mp3";
+import q1 from "@/assets/11.mp3";
+import q2 from "@/assets/22.mp3";
+import q3 from "@/assets/33.mp3";
+import q4 from "@/assets/44.mp3";
+import q5 from "@/assets/55.mp3";
+import q6 from "@/assets/66.mp3";
+import dash7 from "@/assets/dashmusic7.mp3";
+import album from '../assets/image/Rectangle1.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
+import album12 from '../assets/image/Rectangle1.png'
+
 import album4 from '../assets/image/album2.png'
 import audioSrc1 from '@/assets/music1.mp3';
 import audioSrc2 from '@/assets/music2.mp3';
@@ -72,33 +85,246 @@ import { watchEffect } from "vue"
 import { onMounted, onBeforeUnmount } from 'vue';
 import { computed } from "vue";
 export default {
-   setup() {
+//    setup() {
+//    const audioStore = useAudioStore();
+//   const volume = useAudioStore();
+//   const audioSources = [
+   
+//   ];
+//   const audioSource = audioStore.audioSources;
+//   console.log(audioSource);
+
+//     function onInput() {
+      
+//       audioStore.onInput()
+//     };
+//     const play = () => {
+//     audioStore.playAudio(audioSources);
+//    console.log(currentName)
+//   };
+
+//    const playId = (id, audioSources) => {
+//       audioStore.playAudioById(id, audioSources);
+      
+      
+//   };
+    
+//   const pause = () => {
+//     console.log("Pause button clicked" );
+//     audioStore.pauseAudio(audioStore.currentTime);
+//   };
+
+//     const next = () => {
+   
+//     audioStore.nextAudio(audioSources);
+//   };
+// const currentAudio = computed(() => {
+//   if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
+//     return audioStore.audioSources[audioStore.currentAudioIndex];
+//   } else {
+//     return null;
+//   }
+// });
+
+//   return {
+//   onInput,
+//   volume,
+//   pause,
+//   next,
+//   playId,
+//     audioStore,
+//     audioSources,
+//    audioSource,
+//     currentAudio,
+//    duration:audioStore.duration,
+//    currentTime:audioStore.currentTime,
+//     play,
+//    onVolumeInput: audioStore.onVolumeInput,
+//    currentName : audioStore.currentName,
+//    currentImage: audioStore.currentImage,
+//    onInput: audioStore.onInput,
+//   };
+// },
+ setup() {
    const audioStore = useAudioStore();
   const volume = useAudioStore();
-  const audioSources = [
-   
+  const itemForCollectin = [
+                      {
+                        id: 1,
+                        img: album4,
+                        header:'Golden ',
+                        name: 'Sean swadder',
+                       time:'12:00:34', 
+                        src: dash1,  
+                    },
+
+                    {
+                         id: 2,
+                        img:album2,
+                        header:'Reggae ',
+                        name: 'DJ YK Mule',
+                        time:'12:00:34', 
+                         src: dash2, 
+                    },
+
+                    {
+                         id: 3,
+                        img:album3,
+                        header:'Tomorrow’s',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash3,   
+                    },
+
+
+                     {
+                         id: 4,
+                        img:album4,
+                        header:'Tomorrow’s s',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash4,  
+                    },
+
+                   
+                    {
+                         id: 5,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash5,  
+                    },
+
+                    {
+                         id: 6,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash6,  
+                    },
+
+                    {
+                         id: 8,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash7,   
+                    },
+
+                     {
+                         id: 5,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q1,   
+                    },
+                    {
+                         id: 9,
+                        img:album3,
+                        header:'Tomorrow’s',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q2,   
+                    },
+
+                    {
+                         id: 8,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash2,  
+                    },
+
+                     {
+                         id: 5,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: dash4,  
+                    },
+                    {
+                         id: 9,
+                        img:album3,
+                        header:'Tomorrow’s',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash6,   
+                    },
+
+                    {
+                         id: 8,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash5,   
+                    },
+
+                     {
+                         id: 5,
+                        img:album2,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash7   
+                    },
+                    {
+                         id: 9,
+                        img:album3,
+                        header:'Tomorrow’s',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: dash3,   
+                    },
   ];
   const audioSource = audioStore.audioSources;
   console.log(audioSource);
-
+ 
     function onInput() {
       
       audioStore.onInput()
-    };
-    const play = () => {
-    audioStore.playAudio(audioSources);
-   console.log(currentName)
+    }
+
+   
+
+  const play = () => {
+    audioStore.playAudio(currentName);
+   console.log(audioStore.currentAudio);
   };
+
     
   const pause = () => {
     console.log("Pause button clicked" );
     audioStore.pauseAudio(audioStore.currentTime);
   };
 
-    const next = () => {
+  const stop = () => {
    
+   
+    audioStore.stopAudio(audioStore.currentTime);
+  };
+
+  const next = () => {
+   audioStore.initializeAudio(audioSources)
     audioStore.nextAudio(audioSources);
   };
+
+  const prev = () => {
+    
+    audioStore.prevAudio(audioSources);
+  };
+  const playId = (id, audioSources) => {
+      audioStore.playAudioById(id, audioSources);
+      
+      
+  };
+ 
 const currentAudio = computed(() => {
   if (audioStore.currentAudioIndex !== null && audioStore.currentAudioIndex !== undefined) {
     return audioStore.audioSources[audioStore.currentAudioIndex];
@@ -107,18 +333,22 @@ const currentAudio = computed(() => {
   }
 });
 
-  return {
-  onInput,
+ return {
+    play,
+    pause,
+    stop,
+    next,
+    prev,
+    playId,
+
   volume,
-  pause,
-  next,
     audioStore,
-    audioSources,
+   itemForCollectin,
    audioSource,
     currentAudio,
    duration:audioStore.duration,
    currentTime:audioStore.currentTime,
-    play,
+   image:audioStore.image,
    onVolumeInput: audioStore.onVolumeInput,
    currentName : audioStore.currentName,
    currentImage: audioStore.currentImage,
@@ -369,4 +599,17 @@ const currentAudio = computed(() => {
       overflow-y: hidden; /* Hide vertical scrollbar */
       overflow-x: hidden
     }
+
+     .scrolls::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #725718;
+}
+
+ .scrolls::-webkit-scrollbar-thumb:hover {
+  background-color: #facd66;
+}
+
+ .scrolls::-webkit-scrollbar-thumb:active {
+  background-color: #facd66;
+}
 </style>

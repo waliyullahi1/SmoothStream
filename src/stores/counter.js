@@ -101,11 +101,13 @@ export const useAudioStore = defineStore("audio", () => {
 
   const prevAudio = (audioSources) => {
     if (state.currentAudioIndex > 0) {
-       control.value =ref[true];
-
+      
       state.currentAudioIndex--;
-      audio.value.src = audioSources[state.currentAudioIndex].src;
+      audio.value.src = state.audioSources[state.currentAudioIndex].src; 
+      control.value = ref[true];
       playAudio(audioSources);
+    
+     
     }
   };
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary   font-[Quicksand] h-fit">
+  <div class="bg-primary overflow-hidden   font-[Quicksand] h-fit">
    <div class=" mx-auto  bg-primary pt-10">
   
     
@@ -41,11 +41,11 @@
       </div>
       <div class=" lg:w-1/3 w-full  mt-[25px] ">
         <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
-        <div class="flex flex-col mt-6 gap-2 text-white overflow-x-scroll  h-[20rem] ">
-            <div v-for="item in audioSources" @click="playId(item.id)"  :key="item.id" class="flex gap-3 bg-tertiary  items-center justify-between rounded-[2rem] w-full py-2 px-4  ">
-               <div  @click=" playIdi()" class="flex gap-3">
+        <div class="flex flex-col mt-6 gap-2 text-white overflow-scroll  h-[20rem] ">
+            <div v-for="item in audioSources" @click="playId(item.id, audioSources)"  :key="item.id" class="flex gap-3 bg-tertiary  items-center justify-between rounded-[2rem] w-full py-2 px-4  ">
+               <div   class="flex gap-3">
                  
-                 <img @click="playId"  v-bind:src="item.img" alt="" class="w-[5rem]"/>
+                 <img  v-bind:src="item.img" alt="" class="w-[5rem]"/>
                   <div>
                     <h1 class="text-[18px] my-0 font-normal ">{{item.header}}</h1>
                       <h1 class="my-0 text-[14px] text-normal text-gray-400" >{{item.name}}r</h1>
@@ -64,21 +64,17 @@
    </section>
    
    <section class="mt-5 container md:w-full">
-    <div class="md:flex block  w-fu">
+    <div class=" block  w-fu">
       <div class="lg:w-[150px] w-[100px]"></div>
-   
-      <div    class="w-full px-4 overflow-hidden  ">
-        <h1 class="font-semibold text-2xl text-white ">Top Charts </h1>
-        <div class="w-[100rem] mx-4 overflow-srcoll">
-          <div class="flex  gap-3 md:w-[2500px]  w-[2000px] text-white">
-          <div   @click="saveToLocalStorages(item.id)" v-for="source in audioSources" :key="source.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
-               <div class="">
-                 
-                 <img  v-bind:src="source.img" alt="" class="md:w-[2500px] :w-[1500px]"/>
-                  <div>
-                    <h1 class="text-[18px] my-0 font-normal ">{{source.header}}</h1>
-                    <primarybtn class="flex justify-end" @click="playId(source.id)"> ../assets/img/play.svg" alt=""></primarybtn>
-                  </div>
+      <h1 class="font-semibold text-2xl text-white md:ml-32 ml-3">Top Charts </h1>
+      <div    class="w-full md:ml-32 ml-3 px-4 overflow-x-scroll  ">
+        
+        <div class="w-[100rem] mx-4 scrolls overflow-srcoll">
+          <div class="flex  gap-3 md:w-[1000px]  w-[800px] text-white">
+          <div    v-for="source in itemd" @click="playId(source.id, itemd)" :key="source.id" class="fl w-[2500px] mt-3 gap- bg-teriary  items-center justify-between rounded-[2rem]    ">
+               <div   @click="playId(id, source)"  class="">
+                 <img @click="playId" v-bind:src="source.img" alt="" class="md:w-[1000px] :w-[1500px]"/>
+                  
                </div>
                 
             </div>
@@ -87,10 +83,11 @@
       </div>
     </div>
    </section>
-   <play @change="change()"  @next="next"  :contol='contol'></play>
-   <div class="fle w-30" >
+   <section class="w-20 h-52">
 
-   </div>
+   </section>
+   <play @change="change()"  @next="next"  :contol='contol'></play>
+   
    </div>
   </div> 
 </template>
@@ -105,8 +102,16 @@ import dash3 from "@/assets/dashmusic3.mp3";
 import dash4 from "@/assets/dashmusic4.mp3";
 import dash5 from "@/assets/dashmusic5.mp3";
 import dash6 from "@/assets/dashmusic6.mp3";
+import q1 from "@/assets/11.mp3";
+import q2 from "@/assets/22.mp3";
+import q3 from "@/assets/33.mp3";
+import q4 from "@/assets/44.mp3";
+import q5 from "@/assets/55.mp3";
+import q6 from "@/assets/66.mp3";
 import dash7 from "@/assets/dashmusic7.mp3";
-import album from '../assets/image/Rectangle17.png'
+import new2 from '../assets/image/Rectangle3.png'
+import new1 from '../assets/image/Rectangle2.png'
+import album from '../assets/image/Rectangle1.png'
 import album2 from '../assets/image/bookhand.png'
 import album3 from '../assets/image/setradio.png'
 import album4 from '../assets/image/album2.png'
@@ -252,6 +257,76 @@ export default {
                          src: dash3,   
                     },
   ];
+
+  const getArtistTopTracks = async (artistId) => {
+  const response = await fetch(`https://api.deezer.com/artist/${artistId}/top?limit=10`);
+  const data = await response.json();
+  const tracks = data.data;
+  tracks.forEach(track => {
+    const newTrack = {
+      id: track.id,
+      img: track.album.cover_medium,
+      header: track.title,
+      name: track.artist.name,
+      time: track.duration,
+      src: track.preview
+    };
+    itemd.push(newTrack);
+  });
+}
+  const itemd =[
+                    {
+                         id: 5,
+                        img:new2,
+                        header:'night1',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q1,   
+                    },
+                    {
+                         id: 9,
+                        img:new1,
+                        header:'night2',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q2,   
+                    },
+
+                    {
+                         id: 8,
+                        img:album,
+                        header:'1',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: q3,  
+                    },
+
+                     {
+                         id: 5,
+                        img:new2,
+                        header:'night4’',
+                        name: 'Obi Datti',
+                        time:'12:00:34', 
+                         src: q4,  
+                    },
+                    {
+                         id: 9,
+                        img:new1,
+                        header:'night4',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q5,   
+                    },
+
+                    {
+                         id: 8,
+                        img:album,
+                        header:'Tomorrow’',
+                        name: 'Obi Datti',
+                        time:'12:00:34',
+                         src: q6,   
+                    },
+  ];
   const audioSource = audioStore.audioSources;
   console.log(audioSource);
  
@@ -288,9 +363,9 @@ export default {
     
     audioStore.prevAudio(audioSources);
   };
-  const playId = (id) => {
-     audioStore.playAudioById(id, audioSources);
-      audioStore.playAudio(audioSources)
+  const playId = (id, audioSources) => {
+      audioStore.playAudioById(id, audioSources);
+      
       
   };
  
@@ -309,7 +384,7 @@ const currentAudio = computed(() => {
     next,
     prev,
     playId,
- 
+ itemd,
   volume,
     audioStore,
     audioSources,
@@ -356,15 +431,15 @@ const currentAudio = computed(() => {
 }
 *::-webkit-scrollbar-track {
   border-radius: 5px;
-  background-color: #1d2123;
+ 
 }
 
 *::-webkit-scrollbar-track:hover {
-  background-color: #1d2123;
+  
 }
 
 *::-webkit-scrollbar-track:active {
-  background-color: #1d2123;
+
 }
 
 *::-webkit-scrollbar-thumb {
@@ -379,4 +454,28 @@ const currentAudio = computed(() => {
 *::-webkit-scrollbar-thumb:active {
   background-color: #facd66;
 }
+.scroll-hide ul::-webkit-scrollbar { 
+  width: 0 !important;
+  display: none; 
+}
+
+.ul{
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.ul::-webkit-scrollbar {
+    display: none;
+}
+
+  .scrolls::-webkit-scrollbar-thumb {
+  display: none !important; 
+}
+
+ .scrolls::-webkit-scrollbar-thumb:hover {
+  display: none !important;
+}
+
+ .scrolls::-webkit-scrollbar-thumb:active {
+  display: none;}
 </style>

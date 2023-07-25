@@ -34,10 +34,7 @@
   </div>
 </template>
 <script>
-import album from '../assets/image/Rectangle17.png'
-import album2 from '../assets/image/bookhand.png'
-import album3 from '../assets/image/setradio.png'
-import album4 from '../assets/image/album2.png'
+
 export default {
    data(){
             return{

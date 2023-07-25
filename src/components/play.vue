@@ -4,19 +4,19 @@
     <div class="flex mx-auto py-5 px-5 justify-between items-center w-5/6">
       <div class="flex   gap-3 text-white">
        
-     <img :src="audioStore.currentImage"  class="w-10 md:w-20 " alt="">
+     <img :src="audioStore.currentImage"  class="w-20 md:w-20 duration-700 translate transform   " alt="">
         <div class="">
-          <h1 class="text-xl   font-semibold">{{audioStore.currentName}}</h1>
-          <p class="text-14px  ">james</p>
+          <h1 class="text-xl  md:block hidden font-semibold">{{audioStore.currentName}}</h1>
+          <p class="text-14px md:block hidden font-semibold ">james</p>
         </div>
       </div>
      <div class="">
-       <div class="text-white flex gap-10 justify-between items-center bg-black">
+       <div class="text-white flex gap-10 justify-between items-center ">
         
         <img src="../assets/image/shuffle.png" class="w-7 h-7 md:flex hidden" alt="">
 
           <div @click="changectx" class="">
-            <button @click="prevAudio">
+            <button @click="audioStore.prevAudio">
           <img class="w-7" src="../assets/image/previous.png" alt="" >
             </button>
           </div>
@@ -47,10 +47,13 @@
       <input class="w-full" type="range" v-model="audioStore.currentTime" min="0" :max="audioStore.duration" @input="onInput"/>
 
      </div>
-     <div class="flex justify-center gap-5 items-center">
-      <img  class="w-7" src="../assets/image/volume-high.png" alt="">
+     <div  @click="lookMore()" class="  justify-center gap-5 items-center">
+      <img  src="../assets/image/more-vertical.png"  class="w-7   md:hidden flex" alt="">
+      <div :class="showMore? ' flex top-32 right-0 ':'flex -top-8 right-0 '" class="md:static absolute  md:top-0  duration-700 translate transform  md:flex">
+        <img  class="w-7   " src="../assets/image/volume-high.png" alt="">
          <input type="range" v-model="audioStore.volume" min="0" max="1" step="0.01" @input="audioStore.onVolumeInput" />
      </div>
+      </div>
    </div>
   </div>
    
@@ -130,7 +133,8 @@ const currentAudio = computed(() => {
 
   data() {
     return {
-      contol: false
+      contol: false,
+      showMore:true,
     }
   },
   methods:{
@@ -142,8 +146,8 @@ const currentAudio = computed(() => {
       this.$emit("next",)
     },
     
-    changectx(){
-       this.contol = true
+   lookMore(){
+      this.showMore = !this.showMore
         this.$emit("changectx",)
     },
   
