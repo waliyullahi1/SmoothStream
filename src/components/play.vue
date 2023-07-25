@@ -23,11 +23,11 @@
 
         <div @click="change()">
 
-          <button  :class="contol ? 'hidden' :'block'" @click="play">
+          <button  :class="audioStore.control ? 'hidden' :'block'" @click="play">
           <img  class="w-7" src="../assets/image/play.svg" alt="" >
         </button>
         
-        <button class="" :class="contol ? 'block' :'hidden'"  @click="pause">
+        <button class="" :class="audioStore.control ? 'block' :'hidden'"  @click="pause">
           <span ><img class="w-7" src="../assets/image/pause.svg" alt="" ></span>
         </button>
 
@@ -122,6 +122,7 @@ const currentAudio = computed(() => {
    currentName : audioStore.currentName,
    currentImage: audioStore.currentImage,
    onInput: audioStore.onInput,
+   control: audioStore.control,
   };
 },
 
@@ -160,4 +161,62 @@ const currentAudio = computed(() => {
        backdrop-filter: blur(5px);
      
     }
+
+   
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+ 
+}
+
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #ffbf00;
+  border-radius: 0.5rem;
+  height: 0.5rem;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  margin-top: -4px; 
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 3px solid #fd9800;
+  outline-offset: 0.125rem;
+}
+
+
+input[type="range"]::-moz-range-track {
+  background-color: #fbff00;
+  border-radius: 0.5rem;
+  height: 0.5rem;
+}
+
+
+input[type="range"]::-moz-range-thumb {
+  background-color: #ffffff;
+  border: none; 
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb{
+  outline: 3px solid #ffffff;
+  outline-offset: 0.125rem;
+}
 </style>

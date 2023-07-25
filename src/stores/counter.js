@@ -13,6 +13,7 @@ export const useAudioStore = defineStore("audio", () => {
   const currentName = ref(null);
   const currentImage = ref(null);
   const volume = ref(1);
+  const control = ref(false);
 
   const initializeAudio = (audioSources) => {
     console.log("Initializing audio");
@@ -58,16 +59,22 @@ export const useAudioStore = defineStore("audio", () => {
   const playAudio = (audioSources) => {
     if (!audio.value) {
       initializeAudio(audioSources);
+       control.value = !control.value;
+         console.log(control.value);
     }
 
     if (audio.value.paused) {
       audio.value.play();
+       control.value = !control.value;
+         console.log(control.value);
     }
   };
 
   const pauseAudio = (audioSources) => {
     if (!audio.value.paused) {
       audio.value.pause();
+       control.value = !control.value;
+       console.log(control.value);
     }
   };
 
@@ -81,6 +88,7 @@ export const useAudioStore = defineStore("audio", () => {
   const nextAudio = () => {
     if (state.currentAudioIndex < state.audioSources.length - 1) {
       pauseAudio();
+       control.value = ref[true];
       state.currentAudioIndex++;
       audio.value.src = state.audioSources[state.currentAudioIndex].src;
       playAudio();
@@ -91,32 +99,10 @@ export const useAudioStore = defineStore("audio", () => {
     }
   };
 
-  // const nextAudio = (audioSources) => {
-  //     //     state.currentAudioIndex = 0;
-  //     // audio.value.src = audioSources[state.currentAudioIndex].src;
-  //     //   playAudio(audioSources);
-  //     console.log(state.audioSources);
-  //   //  state.currentAudioIndex++;
-  //     // audio.value = new Audio(audioSources[state.currentAudioIndex].src).value;
-  //   //  playAudio(audioSources);
-  //     console.log("the state is error", audioSources);
-  //     console.log(audio.value.src);
-  //    if (state.currentAudioIndex < audioSources.length - 1) {
-  //      pauseAudio(audioSources);
-  //      state.currentAudioIndex++;
-  //      audio.value.src = audioSources[state.currentAudioIndex].src;
-  //      playAudio(audioSources);
-  //      console.log("the statement is true");
-  //    } else {
-  //      state.currentAudioIndex = 0;
-  //      audio.value.src = audioSources[state.currentAudioIndex].src;
-  //      playAudio(audioSources);
-  //      console.log("the statement is false");
-  //    }
-  // };
-
   const prevAudio = (audioSources) => {
     if (state.currentAudioIndex > 0) {
+       control.value =ref[true];
+
       state.currentAudioIndex--;
       audio.value.src = audioSources[state.currentAudioIndex].src;
       playAudio(audioSources);
@@ -125,28 +111,24 @@ export const useAudioStore = defineStore("audio", () => {
 
   const playAudioById = (id, audioSources) => {
     const index = audioSources.findIndex((source) => source.id === id);
-
+    control.value = !control.value;
     if (index !== -1) {
       state.currentAudioIndex = index;
+      control.value = ref[true];
       if (!audio.value) {
         audio.value = new Audio(audioSources[state.currentAudioIndex].src);
         initializeAudio(audioSources);
+        control.value = ref[true];
       } else {
         audio.value.src = audioSources[state.currentAudioIndex].src;
         initializeAudio(audioSources);
+        control.value = ref[true];
       }
       playAudio(audioSources);
     }
   };
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-  };
-
   return {
-    formatTime,
     playAudio,
     pauseAudio,
     stopAudio,
@@ -157,6 +139,7 @@ export const useAudioStore = defineStore("audio", () => {
     onInput,
     currentName,
     volume,
+    control,
     initializeAudio,
     currentAudioIndex: state.currentAudioIndex,
     audioSources: state.audioSources,

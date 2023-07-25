@@ -254,7 +254,7 @@ export default {
   ];
   const audioSource = audioStore.audioSources;
   console.log(audioSource);
- audioStore.initializeAudio(audioSources),
+ 
     function onInput() {
       
       audioStore.onInput()
@@ -280,7 +280,7 @@ export default {
   };
 
   const next = () => {
-   
+   audioStore.initializeAudio(audioSources)
     audioStore.nextAudio(audioSources);
   };
 
