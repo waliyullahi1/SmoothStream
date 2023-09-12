@@ -4,7 +4,7 @@
         <img  :src="audioStore.currentImage"  alt="" class="md:w-full    md:h-w-full" >
       </div>
   <div class="bg w-full bgg relative z-10  font-[Quicksand] h-fit">
-   <div class="w-full bg-black  bg-opacity-75 bg-priary h-sc">
+   <div class="w-full  bg-opacity-75 bg-priary h-sc">
        <Header></Header>
       
       <section class="flex relative z-0 md:mt-10 px-[5rem] ">

@@ -10,6 +10,13 @@ const router = createRouter({
       component: () => import("../views/dashbord.vue"),
     },
 
+
+     {
+      path: "/added",
+      name: "added",
+      component: () => import("../views/aded.vue"),
+    },
+
     {
       path: "/view",
       name: "viewchart",
